@@ -1,0 +1,18 @@
+{
+    "tasks_path": "tasks/obstacle_evaluate_moving",
+    "config": "configs/evaluate.json",
+    "num_processes": 10,
+    "max_time": 1,
+    "checkpoints": [
+        {
+            "name": "ompl_bitstar",
+            "planner": "BITstar",
+            "timeout": 30
+        },
+        {
+            "name": "ompl_birrt",
+            "planner": "RRTConnect",
+            "timeout": 30
+        },
+        "runs/obstacle_v7_2/ckpt_multiarm_motion_planner_00610"]
+}

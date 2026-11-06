@@ -1,0 +1,248 @@
+{
+    "environment": {
+        "retry_on_fail": false,
+        "episode_length": 500,
+        "ur5_speed": 0.02,
+        "orientation_tolerance": 0.1,
+        "curriculum": {
+            "levels": [
+                {
+                    "position_tolerance": 0.1,
+                    "orientation_tolerance": 0.2,
+                    "max_task_ur5s_count": 4,
+                    "max_task_difficulty": 100.0
+                },
+                {
+                    "position_tolerance": 0.08,
+                    "orientation_tolerance": 0.16
+                },
+                {
+                    "position_tolerance": 0.06,
+                    "orientation_tolerance": 0.14
+                },
+                {
+                    "position_tolerance": 0.04,
+                    "orientation_tolerance": 0.1
+                },
+                {
+                    "position_tolerance": 0.036,
+                    "orientation_tolerance": 0.09
+                },
+                {
+                    "position_tolerance": 0.032,
+                    "orientation_tolerance": 0.08
+                },
+                {
+                    "position_tolerance": 0.028,
+                    "orientation_tolerance": 0.07
+                },
+                {
+                    "position_tolerance": 0.026,
+                    "orientation_tolerance": 0.06
+                },
+                {
+                    "position_tolerance": 0.024,
+                    "orientation_tolerance": 0.05
+                },
+                {
+                    "position_tolerance": 0.022
+                },
+                {
+                    "position_tolerance": 0.021
+                },
+                {
+                    "position_tolerance": 0.02
+                },
+                {
+                    "position_tolerance": 0.019
+                },
+                {
+                    "position_tolerance": 0.018
+                },
+                {
+                    "position_tolerance": 0.017
+                },
+                {
+                    "position_tolerance": 0.016
+                },
+                {
+                    "position_tolerance": 0.015
+                },
+                {
+                    "position_tolerance": 0.014
+                },
+                {
+                    "position_tolerance": 0.013
+                },
+                {
+                    "position_tolerance": 0.012
+                },
+                {
+                    "position_tolerance": 0.011
+                },
+                {
+                    "position_tolerance": 0.01
+                }
+            ],
+            "graduation_threshold": 0.7
+        },
+        "stop_ur5_after_reach": false,
+        "workspace_radius": 0.85,
+        "reward": {
+            "collision_penalty": -0.05,
+            "delta": {
+                "orientation": 0,
+                "activation_radius": 100,
+                "position": 0
+            },
+            "individually_reach_target": 0.01,
+            "collectively_reach_target": 1.0,
+            "proximity_penalty": {
+                "max_distance": 1.0,
+                "penalty": 0
+            },
+            "survival_penalty": 0,
+            "cooperative_individual_reach_target": false,
+            "supervision_penalty": 0
+        },
+        "terminate_on_collectively_reach_target": true,
+        "terminate_on_collision": true,
+        "action_interval": 0.05,
+        "prioritized_task_loader": false,
+        "task": {
+            "generation_method": "random",
+            "difficulty": {
+                "max_distance_between_bases": 1.0,
+                "min_distance_between_bases": 0.3
+            },
+            "type": "static"
+        },
+        "obstacles": {
+            "obs2": {
+                "radius": 0.5,
+                "type": "Sphere"
+            },
+            "obs1": {
+                "radius": 0.2,
+                "type": "Sphere"
+            }
+        },
+        "ur5s_position_picker": "evenly_spaced",
+        "collision_distance": 0.0,
+        "max_ur5s_count": 4,
+        "min_ur5s_count": 1,
+        "position_tolerance": 0.04,
+        "expert": {
+            "tolerance_config": {
+                "max_magnitude": 0.5,
+                "tolerance": 0.1,
+                "threshold": 0.01
+            },
+            "waypoint_conversion_mode": "tolerance",
+            "expert_on_fail": true,
+            "threshold_config ": {
+                "threshold": 0.1
+            }
+        },
+        "action_type": "delta",
+        "expert_root_dir": "experts/base_obs"
+    },
+    "training": {
+        "update_interval": 16000,
+        "centralized_critic": false,
+        "save_interval": 1,
+        "network": {
+            "actor": {
+                "lstm_bidirectional": false,
+                "initial_hidden_state": "zero",
+                "modules": [
+                    "lstm",
+                    "mlp"
+                ],
+                "lstm_num_layers": 1,
+                "lstm_hidden_size": 256,
+                "mlp_layers": [
+                    128,
+                    64
+                ]
+            },
+            "critic": {
+                "lstm_bidirectional": false,
+                "initial_hidden_state": "zero",
+                "modules": [
+                    "lstm",
+                    "mlp"
+                ],
+                "lstm_num_layers": 1,
+                "lstm_hidden_size": 256,
+                "mlp_layers": [
+                    128,
+                    64
+                ]
+            }
+        },
+        "k_nearest_obstacles": 2,
+        "action_variance": {
+            "max": 0.1,
+            "log": true,
+            "min": 1e-08
+        },
+        "algo": "sac",
+        "num_processes": 16,
+        "centralized_policy": false,
+        "hyperparameters": {
+            "tau": 0.001,
+            "discount": 0.99,
+            "pi_lr": 0.0005,
+            "q_lr": 0.001,
+            "action_scaling": 1,
+            "num_updates_per_train": 10,
+            "memory_cluster_capacity": 50000.0,
+            "minimum_replay_buffer_freshness": 0.7,
+            "batch_size": 4096,
+            "warmup_timesteps": 20000.0,
+            "alpha": 0.001
+        },
+        "observations": {
+            "items": [
+                {
+                    "name": "joint_values",
+                    "dimensions": 6,
+                    "history": 1
+                },
+                {
+                    "name": "end_effector_pose",
+                    "dimensions": 7,
+                    "history": 1
+                },
+                {
+                    "name": "target_pose",
+                    "dimensions": 7,
+                    "history": 1
+                },
+                {
+                    "name": "link_positions",
+                    "dimensions": 30,
+                    "history": 1
+                },
+                {
+                    "name": "pose",
+                    "dimensions": 7,
+                    "history": 0
+                },
+                {
+                    "name": "nearest_obstacles",
+                    "dimensions": 6,
+                    "history": 0
+                }
+            ]
+        }
+    },
+    "behaviour-clone": {
+        "lr": 0.001,
+        "epochs": 100,
+        "weight_decay": 1e-05,
+        "batch_size": 128
+    },
+    "description": "Take position of 2 nearest sphere obstacles into arm state."
+}

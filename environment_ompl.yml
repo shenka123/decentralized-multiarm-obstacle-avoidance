@@ -1,0 +1,26 @@
+name: multiarm-ompl
+channels:
+  - pytorch
+  - anaconda
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - matplotlib
+  - pytorch
+  - numpy
+  - seaborn
+  - pip
+  - tqdm
+  - numba
+  - pip:
+    - gym
+    - numpy-quaternion
+    - ray
+    - tensorboardx
+    - pybullet
+    - transforms3d
+    - trimesh
+    - PySimpleGUI
+    - urdfpy
+    - ompl

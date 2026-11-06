@@ -1,0 +1,15 @@
+# Dependencies of the multiarm-webapp env, installed by webapp/environment.yml.
+# pybullet comes from conda-forge in that file, as PyPI has no prebuilt
+# Windows wheel for it.
+#
+# OMPL and RL planning do not run in this env: webapp/plan_worker.py runs in
+# the multiarm-ompl env inside WSL (see webapp/algorithms/wsl_worker.py).
+#
+# Known issue: numpy matrix products through MKL can crash this env on Windows
+# (error 0xc06d007f) because of an old tbb. The webapp avoids them; updating
+# tbb probably fixes it (untested):
+#   conda install -n multiarm-webapp -c conda-forge "tbb>=2023.1"
+numpy-quaternion
+dash
+pillow
+matplotlib

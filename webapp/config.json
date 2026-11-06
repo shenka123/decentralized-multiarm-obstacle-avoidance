@@ -1,0 +1,19 @@
+{
+    "planner_order": [
+        "RL - Baseline",
+        "RL - Individualistic",
+        "RL - Lenient",
+        "RL - Low Penalty",
+        "OMPL - BITstar",
+        "OMPL - RRTConnect"
+    ],
+    "rl_config": "configs/evaluate_webapp.json",
+    "early_stop": {
+        "threshold": 0.1,
+        "steps": 10
+    },
+    "ompl_playback": {
+        "max_joint_step": 0.06,
+        "max_joint_accel": 0.01
+    }
+}
